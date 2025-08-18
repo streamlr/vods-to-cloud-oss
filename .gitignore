@@ -3,3 +3,9 @@
 
 # Environment variables
 .env
+
+# Python trash
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
