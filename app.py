@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from src.lib import twitch_oauth
 import os
 
-load_dotenv(".env")
+load_dotenv()
 
 
 def main():
