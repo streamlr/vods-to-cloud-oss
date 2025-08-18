@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 from flask import Flask, request, redirect
+from json import dump as json_dump
 import os
 import requests
 import urllib.parse
@@ -42,7 +43,7 @@ def auth_server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str):
         tokens = resp.json()
 
         with open("src/data/tokens.json", "w") as f:
-            f.write(str(tokens))
+            json_dump(tokens, f)
 
         return f"Logging successful"
 

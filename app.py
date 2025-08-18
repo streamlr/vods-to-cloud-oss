@@ -10,8 +10,8 @@ def main():
     CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
     REDIRECT_URI = os.getenv("TWITCH_REDIRECT_URI")
 
-    response = twitch_oauth(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-    print(response)
+    tokens = twitch_oauth(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+    print(tokens)
 
 
 if __name__ == "__main__":
