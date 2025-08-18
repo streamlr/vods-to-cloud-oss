@@ -9,3 +9,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Twitch OAuth tokens
+src/data/tokens.json
