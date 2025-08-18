@@ -1,2 +1,2 @@
-twitchAPI
-dotenv
+python-dotenv
+requests
