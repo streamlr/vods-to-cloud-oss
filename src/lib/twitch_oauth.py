@@ -1,4 +1,4 @@
-from ..utils import auth_server
+from ... import auth_server
 from json import load as json_load
 
 
@@ -7,10 +7,9 @@ def twitch_oauth(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str):
         print("Missing required environment variables.")
         return None
 
-    auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
-
     with open("src/data/tokens.json", "r") as f:
         tokens = json_load(f)
+
     return tokens
 
 
