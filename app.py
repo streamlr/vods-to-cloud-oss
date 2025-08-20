@@ -26,12 +26,14 @@ def update_token():
 def main():
     global tokens
 
-    tokens = auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+    tokens = auth_server()
 
-    schedule.every(1).hours.do(update_token)
+    # schedule.every(1).hours.do(update_token)
 
     while True:
-        schedule.run_pending()
+        # schedule.run_pending()
+
+        print(tokens)
 
         time.sleep(1)
 

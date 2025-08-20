@@ -6,6 +6,11 @@ import time
 import os
 import threading
 
+load_dotenv()
+
+CLIENT_ID = os.getenv("TWITCH_CLIENT_ID")
+CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
+REDIRECT_URI = os.getenv("TWITCH_REDIRECT_URI")
 
 tokens = None
 app = Flask(__name__)
@@ -45,7 +50,7 @@ def run_server():
     app.run(port=5000, debug=False, use_reloader=False)
 
 
-def auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI):
+def auth_server():
     server_thread = threading.Thread(target=run_server)
     server_thread.start()
 
@@ -60,11 +65,5 @@ def auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI):
 
 
 if __name__ == "__main__":
-    load_dotenv()
-
-    CLIENT_ID = os.getenv("TWITCH_CLIENT_ID")
-    CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
-    REDIRECT_URI = os.getenv("TWITCH_REDIRECT_URI")
-
     result = auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
     print("Tokens received:", result)
