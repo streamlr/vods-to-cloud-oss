@@ -5,3 +5,10 @@ Upload your VODs to the cloud using this open-source solution. Self-hosted and c
 If you aren't a developer and need help with the setup, we'll offer paid support options in the future.
 
 Project by _Streamlr_ and [diegodev18](https://diego18.pro)
+
+## Features
+
+- VODs download
+- S3 support
+- YouTube support
+- Webhooks to get notified when users upload new VODs
