@@ -1,21 +1,23 @@
 from dotenv import load_dotenv
-from flask import Flask, request, redirect
-from json import dump as json_dump
-from dotenv import load_dotenv
+from flask import Flask, request
 from src.utils import get_auth_url, get_twitch_tokens_from_server
+import time
 import os
-import requests
-import urllib.parse
+import threading
 
-load_dotenv()
 
-CLIENT_ID = os.getenv("TWITCH_CLIENT_ID")
-CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
-REDIRECT_URI = os.getenv("TWITCH_REDIRECT_URI")
-
+tokens = None
 app = Flask(__name__)
 
-f_tokens: str | None = None
+
+def shutdown_server():
+    try:
+        func = request.environ.get('werkzeug.server.shutdown')
+        if func is None:
+            raise RuntimeError("Cannot shutdown server")
+        func()
+    except Exception as e:
+        pass
 
 
 @app.route("/")
@@ -26,16 +28,38 @@ def index():
 
 @app.route("/callback")
 def callback():
+    global tokens
+
     code = request.args.get("code")
     if not code:
-        return "Error: no se recibió el code", 400
+        return "Error: no code received", 400
 
     tokens = get_twitch_tokens_from_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, code)
 
-    with open("src/data/tokens.json", "w") as f:
-        json_dump(tokens, f)
-
-    return f"Logging successful"
+    shutdown_server()
+    return "Login successful, you can close this tab now."
 
 
-app.run(port=5000, debug=True)
+def run_server():
+    app.run(port=5000, debug=False, use_reloader=False)
+
+
+def auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI):
+    server_thread = threading.Thread(target=run_server)
+    server_thread.start()
+
+    while not tokens:
+        time.sleep(1)
+
+    return tokens
+
+
+if __name__ == "__main__":
+    load_dotenv()
+
+    CLIENT_ID = os.getenv("TWITCH_CLIENT_ID")
+    CLIENT_SECRET = os.getenv("TWITCH_CLIENT_SECRET")
+    REDIRECT_URI = os.getenv("TWITCH_REDIRECT_URI")
+
+    result = auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI)
+    print("Tokens received:", result)
