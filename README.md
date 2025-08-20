@@ -1,2 +1,7 @@
-# vods-to-cloud-oss
-Vods to cloud free for non-commercial use. Get vods to cloud service in your own server.
+# VODs To Cloud Open-Source
+
+Upload your VODs to the cloud using this open-source solution. Self-hosted and customizable to fit your needs.
+
+If you aren't a developer and need help with the setup, we'll offer paid support options in the future.
+
+Project by _Streamlr_ and [diegodev18](https://diego18.pro)
