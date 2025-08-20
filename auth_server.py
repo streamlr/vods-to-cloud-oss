@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from json import dump
 from flask import Flask, request
 from src.utils import get_auth_url, get_twitch_tokens_from_server
 import time
@@ -50,6 +51,10 @@ def auth_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI):
 
     while not tokens:
         time.sleep(1)
+
+    tokens_path = os.path.join("src", "data", "tokens.json")
+    with open(tokens_path, "w") as f:
+        dump(tokens, f)
 
     return tokens
 

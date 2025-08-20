@@ -30,7 +30,7 @@ def get_twitch_tokens_from_server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_U
     return tokens
 
 
-def get_saved_twitch_tokens(CLIENT_ID: str, CLIENT_SECRET: str) -> dict | None:
+def get_saved_twitch_tokens() -> dict | None:
     tokens_path = path.join("src", "data", "tokens.json")
 
     if not path.exists(tokens_path):
@@ -39,6 +39,10 @@ def get_saved_twitch_tokens(CLIENT_ID: str, CLIENT_SECRET: str) -> dict | None:
 
     with open(tokens_path, "r") as f:
         tokens = json_load(f)
+
+    if not tokens["access_token"]:
+        print("Access token is missing. Please run the OAuth flow first.")
+        return None
 
     return tokens
 
