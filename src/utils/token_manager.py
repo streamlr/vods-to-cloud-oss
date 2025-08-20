@@ -1,5 +1,6 @@
+from json import dump
 import requests
-
+import os
 
 
 def refresh_token(CLIENT_ID: str, CLIENT_SECRET: str, REFRESH_TOKEN: str):
@@ -22,10 +23,14 @@ def refresh_token(CLIENT_ID: str, CLIENT_SECRET: str, REFRESH_TOKEN: str):
 def get_access_token_from_refresh(CLIENT_ID: str, CLIENT_SECRET: str, REFRESH_TOKEN: str):
     refresh_token_data = refresh_token(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN)
 
-    return {
-        "access_token": refresh_token_data.get("access_token"),
-        "refresh_token": refresh_token_data.get("refresh_token")
-    }
+    if refresh_token_data is None:
+        raise Exception("Failed to refresh token")
+
+    token_path = os.path.join("src", "data", "tokens.json")
+    with open(token_path, "w") as token_file:
+        dump(refresh_token_data, token_file)
+
+    return refresh_token_data
 
 
 if __name__ == "__main__":
