@@ -28,10 +28,10 @@ def main():
 
     tokens = auth_server()
 
-    # schedule.every(1).hours.do(update_token)
+    schedule.every(1).hours.do(update_token)
 
     while True:
-        # schedule.run_pending()
+        schedule.run_pending()
 
         print(tokens)
 
