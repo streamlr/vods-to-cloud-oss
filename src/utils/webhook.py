@@ -1,6 +1,6 @@
 import requests
 
-def register_webhook(CLIENT_ID: str, ACCESS_TOKEN: str, WEBHOOK_PATH: str = "http://127.0.0.1:5000/webhook"):
+def register_webhook(CLIENT_ID: str, ACCESS_TOKEN: str, BROADCASTER_ID: str, WEBHOOK_PATH: str = "http://127.0.0.1:5000/webhook"):
     headers = {
         "Client-ID": CLIENT_ID,
         "Authorization": f"Bearer {ACCESS_TOKEN}",
@@ -11,7 +11,7 @@ def register_webhook(CLIENT_ID: str, ACCESS_TOKEN: str, WEBHOOK_PATH: str = "htt
         "type": "stream.offline",
         "version": "1",
         "condition": {
-            "broadcaster_user_id": "1337"
+            "broadcaster_user_id": BROADCASTER_ID
         },
         "transport": {
             "method": "webhook",
