@@ -15,7 +15,7 @@ def server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str, PORT: int = 50
         if get_saved_twitch_tokens():
             logged_page_path = os.path.join("src", "pages", "logged.html")
             with open(logged_page_path, "r") as f:
-                return f.read()
+                return f.read().replace("{{auth_url}}", auth_url)
 
         login_page_path = os.path.join("src", "pages", "login.html")
         with open(login_page_path, "r") as f:
