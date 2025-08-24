@@ -1,6 +1,5 @@
-from dotenv import load_dotenv
 from flask import Flask, request
-from src.utils import get_auth_url, get_twitch_tokens_from_server
+from src.utils import get_auth_url, get_twitch_tokens_from_server, register_webhook
 import os
 
 
@@ -25,7 +24,9 @@ def server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str):
         if not code:
             return "Error: no code received", 400
 
-        get_twitch_tokens_from_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, code)
+        tokens = get_twitch_tokens_from_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, code)
+
+        register_webhook(tokens)
 
         callback_page_path = os.path.join("src", "pages", "callback.html")
         with open(callback_page_path, "r") as f:
