@@ -9,6 +9,8 @@ Project by _Streamlr_ and [diegodev18](https://diego18.pro)
 ## Features
 
 - VODs download
+
+Types to save vods:
 - S3 support
+- Backblaze support
 - YouTube support
-- Webhooks to get notified when users upload new VODs
