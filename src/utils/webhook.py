@@ -25,3 +25,28 @@ def register_webhook(CLIENT_ID: str, ACCESS_TOKEN: str, BROADCASTER_ID: str, WEB
         print("Webhook registered successfully.")
     else:
         print("Failed to register webhook:", response.status_code, response.text)
+
+
+def get_webhooks(CLIENT_ID: str, ACCESS_TOKEN: str):
+    headers = {
+        "Client-ID": CLIENT_ID,
+        "Authorization": f"Bearer {ACCESS_TOKEN}",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.get("https://api.twitch.tv/helix/webhooks/subscriptions", headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print("Failed to retrieve webhooks:", response.status_code, response.text)
+        return None
+    
+
+if __name__ == "__main__":
+    from sys import argv
+
+    CLIENT_ID = argv[1]
+    ACCESS_TOKEN = argv[2]
+
+    print(get_webhooks(CLIENT_ID, ACCESS_TOKEN))
