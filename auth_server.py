@@ -29,7 +29,12 @@ def shutdown_server():
 @app.route("/")
 def index():
     auth_url = get_auth_url(CLIENT_ID, REDIRECT_URI)
-    return f'<a href="{auth_url}">Login with Twitch</a>'
+
+    login_page_path = os.path.join("src", "pages", "login.html")
+    with open(login_page_path, "r") as f:
+        return f.read().replace("{{auth_url}}", auth_url)
+
+    return f"<a href=\"{auth_url}\">Login with Twitch</a>"
 
 
 @app.route("/callback")
@@ -43,6 +48,11 @@ def callback():
     tokens = get_twitch_tokens_from_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, code)
 
     shutdown_server()
+
+    callback_page_path = os.path.join("src", "pages", "callback.html")
+    with open(callback_page_path, "r") as f:
+        return f.read()
+
     return "Login successful, you can close this tab now."
 
 
