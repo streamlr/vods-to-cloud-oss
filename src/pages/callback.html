@@ -51,9 +51,21 @@
             margin-bottom: 0.2rem;
         }
 
-        #login-link {
+        #close-button {
             margin-top: 1rem;
             max-width: 300px;
+            padding: 0.3rem 0.5rem;
+            background: #0c0c0c;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+
+            &:hover {
+                background: #1f1f1f;
+            }
         }
     </style>
 </head>
@@ -70,13 +82,15 @@
             services. Or <a href="https://github.com/streamlr/vods-to-cloud-oss" target="_blank"
                 rel="noopener noreferrer">contribute on GitHub</a>.
         </p>
-        <button id="login-link">Press here to close this tab</button>
+        <button id="close-button">Press here to close this tab</button>
     </section>
 
     <script>
-        document.getElementById("login-link").onclick = function () {
-            window.close();
-        };
+        const closeButton = document.getElementById("close-button");
+
+        closeButton.addEventListener("click", () => {
+            window.location.href = "https://streamlr.live";
+        });
     </script>
 </body>
 
