@@ -40,7 +40,7 @@ def get_saved_twitch_tokens() -> dict | None:
     with open(tokens_path, "r") as f:
         tokens = json_load(f)
 
-    if not tokens["access_token"]:
+    if "access_token" not in tokens:
         print("Access token is missing. Please run the OAuth flow first.")
         return None
 
