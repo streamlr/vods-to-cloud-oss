@@ -1,5 +1,5 @@
 from flask import Flask, request
-from src.utils import get_auth_url, get_twitch_tokens_from_server, register_webhook
+from src.utils import get_auth_url, get_twitch_tokens_from_server, get_saved_twitch_tokens, register_webhook
 import os
 
 
@@ -10,6 +10,11 @@ def server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str):
     @app.route("/")
     def index():
         auth_url = get_auth_url(CLIENT_ID, REDIRECT_URI)
+
+        if get_saved_twitch_tokens():
+            logged_page_path = os.path.join("src", "pages", "logged.html")
+            with open(logged_page_path, "r") as f:
+                return f.read()
 
         login_page_path = os.path.join("src", "pages", "login.html")
         with open(login_page_path, "r") as f:

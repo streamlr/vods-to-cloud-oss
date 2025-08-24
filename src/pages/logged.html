@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vods to cloud OSS Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Funnel Display", sans-serif;
+            color: white;
+            background-color: #313638;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100dvh;
+            text-align: center;
+        }
+
+        section * {
+            max-width: 600px;
+        }
+
+        a {
+            color: #5398be;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        h1 {
+            margin-bottom: 0.3rem;
+        }
+
+        p {
+            margin-bottom: 0.2rem;
+        }
+
+        #login-link {
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Vods to cloud OSS</h1>
+        <p>
+            Hi there! You're using Vods to Cloud open-source version by
+            <a href="https://streamlr.live" target="_blank" rel="noopener noreferrer">Streamlr</a>.
+        </p>
+        <p>
+            If you want to support the project, consider using the
+            <a href="https://streamlr.live" target="_blank" rel="noopener noreferrer">Streamlr</a>
+            services. Or <a href="https://github.com/streamlr/vods-to-cloud-oss" target="_blank"
+                rel="noopener noreferrer">contribute on GitHub</a>.
+        </p>
+        <p>
+            You have already an account registered with Twitch. If you want to use another account, please login again.
+        </p>
+        <a id="login-link" href="{{auth_url}}">Press here to login with Twitch and start using Vods to Cloud</a>
+    </section>
+</body>
+
+</html>
