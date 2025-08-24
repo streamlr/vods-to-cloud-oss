@@ -1,6 +1,7 @@
 from flask import Flask, request
 from .twitch_oauth import get_auth_url, get_twitch_tokens_from_server, get_saved_twitch_tokens
 from .webhook import register_webhook
+from .user_data import get_user_data
 import os
 
 def server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str, PORT: int = 5000):
@@ -31,7 +32,9 @@ def server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str, PORT: int = 50
 
         tokens = get_twitch_tokens_from_server(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, code)
 
-        register_webhook(CLIENT_ID, tokens["access_token"], f"http://127.0.0.1:{PORT}/webhook")
+        user_data = get_user_data(CLIENT_ID, tokens["access_token"])
+
+        register_webhook(CLIENT_ID, tokens["access_token"], user_data["id"], f"http://127.0.0.1:{PORT}/webhook")
 
         callback_page_path = os.path.join("src", "pages", "callback.html")
         with open(callback_page_path, "r") as f:
