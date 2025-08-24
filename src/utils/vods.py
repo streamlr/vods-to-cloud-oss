@@ -4,13 +4,13 @@ import requests
 
 def get_all_vods(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
     headers = {
-        "Client-ID": CLIENT_ID,
         "Authorization": f"Bearer {ACCESS_TOKEN}",
-        "Content-Type": "application/json"
+        "Client-ID": CLIENT_ID,
     }
 
     params = {
-        "user_id": USER_ID
+        "user_id": USER_ID,
+        "type": "archive",
     }
 
     response = requests.get("https://api.twitch.tv/helix/videos", headers=headers, params=params)
@@ -22,11 +22,15 @@ def get_all_vods(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
         return None
 
 
+
 def get_latest_vod(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
     all_vods = get_all_vods(CLIENT_ID, ACCESS_TOKEN, USER_ID)
-
-    if all_vods and isinstance(all_vods, list) and len(all_vods) > 0:
-        latest_vod = max(all_vods, key=lambda vod: vod['created_at'])
+    
+    if all_vods:
+        latest_vod = max(
+            all_vods,
+            key=lambda vod: datetime.fromisoformat(vod['created_at'].replace("Z", "+00:00"))
+        )
         return latest_vod
     
     return None
@@ -47,7 +51,7 @@ if __name__ == "__main__":
     print("VOD data:", CLIENT_ID, ACCESS_TOKEN, USER_ID, sep="\n")
 
     vod_data = get_all_vods(CLIENT_ID, ACCESS_TOKEN, USER_ID)
-    print("VOD data:", vod_data)
+    print("VODs retrieved:", vod_data)
 
     latest_vod_data = get_latest_vod(CLIENT_ID, ACCESS_TOKEN, USER_ID)
     print("Latest VOD data:", latest_vod_data)
