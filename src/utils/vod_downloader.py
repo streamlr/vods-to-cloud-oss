@@ -68,8 +68,8 @@ def download_vod_from_id(vod_id: str, output_dir: str = "downloads") -> bool:
     return download_vod(vod_url, output_dir)
 
 
-  if __name__ == "__main__":
-    # Ejemplo de uso
-    test_vod_id = "123456789"  # Reemplazar con ID real
+if __name__ == "__main__":
+    # Example of use
+    test_vod_id = "123456789"  # Replace with real ID
     success = download_vod_from_id(test_vod_id)
-    print(f"Descarga {'exitosa' if success else 'falló'}")
+    print(f"Download {'successful' if success else 'failed'}")
