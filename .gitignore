@@ -12,3 +12,6 @@ __pycache__/
 
 # Twitch OAuth tokens
 src/data/tokens.json
+
+# Environments
+/myenv
