@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 
 
@@ -15,7 +16,7 @@ def get_all_vods(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
     response = requests.get("https://api.twitch.tv/helix/videos", headers=headers, params=params)
 
     if response.status_code == 200:
-        return response.json()
+        return response.json()['data']
     else:
         print("Failed to retrieve VODs:", response.status_code, response.text)
         return None
@@ -23,6 +24,12 @@ def get_all_vods(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
 
 def get_latest_vod(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
     all_vods = get_all_vods(CLIENT_ID, ACCESS_TOKEN, USER_ID)
+
+    if all_vods and isinstance(all_vods, list) and len(all_vods) > 0:
+        latest_vod = max(all_vods, key=lambda vod: vod['created_at'])
+        return latest_vod
+    
+    return None
 
 
 if __name__ == "__main__":
@@ -41,3 +48,6 @@ if __name__ == "__main__":
 
     vod_data = get_all_vods(CLIENT_ID, ACCESS_TOKEN, USER_ID)
     print("VOD data:", vod_data)
+
+    latest_vod_data = get_latest_vod(CLIENT_ID, ACCESS_TOKEN, USER_ID)
+    print("Latest VOD data:", latest_vod_data)
