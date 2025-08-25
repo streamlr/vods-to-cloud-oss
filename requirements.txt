@@ -2,3 +2,4 @@ python-dotenv
 requests
 flask
 schedule
+yt-dlp
