@@ -7,7 +7,7 @@ tokens_path = path.join("src", "data", "tokens.json")
 
 
 def get_auth_url(CLIENT_ID: str, REDIRECT_URI: str) -> str:
-    scope = ["user:read:broadcast"]
+    scope = ["user:read:broadcast", "channel:manage:videos"]
     params = {
         "client_id": CLIENT_ID,
         "redirect_uri": REDIRECT_URI,
