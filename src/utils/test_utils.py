@@ -4,7 +4,10 @@ from os import getenv
 
 load_dotenv()
 
-def test_util(callback: callable, args: list):
+def test_util(callback: callable, args: list, debug: bool = True, showEnv: bool = False):
+    if debug:
+        print("Testing utility function...")
+
     VAR_ENVIRONMENTS = []
 
     for arg in args:
@@ -14,6 +17,9 @@ def test_util(callback: callable, args: list):
             VAR_ENVIRONMENTS.append(getenv(arg))
         else:
             VAR_ENVIRONMENTS.append(arg)
+
+    if debug and showEnv:
+        print("VAR_ENVIRONMENTS:", VAR_ENVIRONMENTS)
 
     result = callback(*VAR_ENVIRONMENTS)
 

@@ -2,12 +2,13 @@ import requests
 
 
 def hide_vod_by_id(CLIENT_ID: str, ACCESS_TOKEN: str, VOD_ID: str):
-    url = f"https://api.twitch.tv/helix/videos/{VOD_ID}"
+    url = f"https://api.twitch.tv/helix/videos"
     headers = {
         "Client-ID": CLIENT_ID,
         "Authorization": f"Bearer {ACCESS_TOKEN}"
     }
     data = {
+        "id": VOD_ID,
         "viewable": "private"
     }
 
@@ -19,5 +20,5 @@ def hide_vod_by_id(CLIENT_ID: str, ACCESS_TOKEN: str, VOD_ID: str):
 if __name__ == "__main__":
     from test_utils import test_util
 
-    response = test_util(hide_vod_by_id, ["TWITCH_CLIENT_ID", "ACCESS_TOKEN", "VOD_ID"])
+    response = test_util(hide_vod_by_id, ["TWITCH_CLIENT_ID", "ACCESS_TOKEN", "2548950092"])
     print("Response:", response)
