@@ -34,4 +34,7 @@ def get_access_token_from_refresh(CLIENT_ID: str, CLIENT_SECRET: str, REFRESH_TO
 
 
 if __name__ == "__main__":
-    get_access_token_from_refresh("your_client_id", "your_client_secret", "your_refresh_token")
+    from test_utils import test_util
+
+    token_data = test_util(get_access_token_from_refresh, ["TWITCH_CLIENT_ID", "TWITCH_CLIENT_SECRET", "TWITCH_REFRESH_TOKEN"])
+    print("Token data:", token_data)

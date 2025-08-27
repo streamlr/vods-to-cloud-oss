@@ -44,16 +44,7 @@ def get_webhooks(CLIENT_ID: str, ACCESS_TOKEN: str):
     
 
 if __name__ == "__main__":
-    from dotenv import load_dotenv
-    from os import getenv
-    from twitch_oauth import get_saved_twitch_tokens
+    from test_utils import test_util
 
-    load_dotenv()
-
-    CLIENT_ID = getenv("TWITCH_CLIENT_ID")
-    ACCESS_TOKEN = get_saved_twitch_tokens()["access_token"]
-
-    print("Webhook data:", CLIENT_ID, ACCESS_TOKEN, sep="\n")
-
-    webhook_data = get_webhooks(CLIENT_ID, ACCESS_TOKEN)
+    webhook_data = test_util(get_webhooks, ["TWITCH_CLIENT_ID", "ACCESS_TOKEN"])
     print("Webhook data:", webhook_data)
