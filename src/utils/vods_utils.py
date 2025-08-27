@@ -1,4 +1,7 @@
+from os import path, makedirs
 import yt_dlp
+
+VODS_DIR_PATH = "vods"
 
 
 def get_vod_url(VOD_ID: str) -> str:
@@ -12,9 +15,13 @@ def download_vods(VOD_ID: str, ACCESS_TOKEN: str | None) -> bool:
         "Authorization": f"Bearer {ACCESS_TOKEN}"
     }
 
+    makedirs(VODS_DIR_PATH, exist_ok=True)
+
+    OUTPUT_PATH = path.join(VODS_DIR_PATH, f"{VOD_ID}.mp4")
+
     ydl_opts = {
         'format': 'best',
-        'outtmpl': 'vod.mp4',
+        'outtmpl': OUTPUT_PATH,
         'http_headers': headers if ACCESS_TOKEN else {},
     }
 
