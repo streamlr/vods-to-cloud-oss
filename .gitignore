@@ -4,6 +4,9 @@
 # Environment variables
 .env
 
+# Navigator variables
+cookies.txt
+
 # Python trash
 __pycache__/
 *.pyc
