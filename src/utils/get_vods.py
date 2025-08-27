@@ -37,21 +37,11 @@ def get_latest_vod(CLIENT_ID: str, ACCESS_TOKEN: str, USER_ID: str):
 
 
 if __name__ == "__main__":
-    from dotenv import load_dotenv
-    from os import getenv
-    from twitch_oauth import get_saved_twitch_tokens
+    from test_utils import test_util
     from user_data import get_user_data
 
-    load_dotenv()
-
-    CLIENT_ID = getenv("TWITCH_CLIENT_ID")
-    ACCESS_TOKEN = get_saved_twitch_tokens()["access_token"]
-    USER_ID = get_user_data(CLIENT_ID, ACCESS_TOKEN)["id"]
-
-    print("VOD data:", CLIENT_ID, ACCESS_TOKEN, USER_ID, sep="\n")
-
-    vod_data = get_all_vods(CLIENT_ID, ACCESS_TOKEN, USER_ID)
+    vod_data = test_util(get_all_vods, ["TWITCH_CLIENT_ID", "ACCESS_TOKEN", "USER_ID"])
     print("VODs retrieved:", vod_data)
 
-    latest_vod_data = get_latest_vod(CLIENT_ID, ACCESS_TOKEN, USER_ID)
+    latest_vod_data = test_util(get_latest_vod, ["TWITCH_CLIENT_ID", "ACCESS_TOKEN", "USER_ID"])
     print("Latest VOD data:", latest_vod_data)
