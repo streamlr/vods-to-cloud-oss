@@ -53,3 +53,9 @@ def server(CLIENT_ID: str, CLIENT_SECRET: str, REDIRECT_URI: str, PORT: int = 50
 
 
     app.run(port=PORT, debug=False, use_reloader=False)
+
+
+if __name__ == "__main__":
+    from test_utils import test_util
+
+    test_util(server, ["TWITCH_CLIENT_ID", "TWITCH_CLIENT_SECRET", "TWITCH_REDIRECT_URI", 5000])
