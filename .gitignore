@@ -15,3 +15,6 @@ __pycache__/
 
 # Twitch OAuth tokens
 src/data/tokens.json
+
+# Vods dirs & files
+vods/
