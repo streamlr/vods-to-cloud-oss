@@ -23,6 +23,8 @@ def download_vods(VOD_ID: str, ACCESS_TOKEN: str | None) -> bool:
         'format': 'best',
         'outtmpl': OUTPUT_PATH,
         'http_headers': headers if ACCESS_TOKEN else {},
+        'quiet': True,
+        'no_warnings': True
     }
 
     try:
