@@ -1,6 +1,9 @@
 from os import path, makedirs, getcwd
 import yt_dlp
 
+# This script uses yt-dlp to download Twitch VODs. But it only supports public and not only-subs vods.
+
+COOKIE_PATH = path.join(getcwd(), "cookies.txt")
 VODS_DIR_PATH = "vods"
 
 
@@ -18,8 +21,6 @@ def download_vods(VOD_ID: str, ACCESS_TOKEN: str | None) -> bool:
     makedirs(VODS_DIR_PATH, exist_ok=True)
 
     OUTPUT_PATH = path.join(VODS_DIR_PATH, f"{VOD_ID}.mp4")
-
-    COOKIE_PATH = path.join(getcwd(), "cookies.txt")
 
     ydl_opts = {
         'cookiefile': COOKIE_PATH,
