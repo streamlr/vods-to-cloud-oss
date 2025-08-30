@@ -50,9 +50,6 @@ Project by _Streamlr_ and [diegodev18](https://diego18.pro)
 
 ## Features
 
-- [x] Get VODs
-- [ ] VODs download
-
 Types to save vods to add:
 
 - [ ] S3 storage support
