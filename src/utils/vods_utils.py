@@ -1,7 +1,7 @@
 from os import path, makedirs, getcwd
 import subprocess
 
-# This script uses yt-dlp to download Twitch VODs. But it only supports public and not only-subs vods.
+# This script uses twitch-dlp to download Twitch VODs. But it only supports public vods.
 
 COOKIE_PATH = path.join(getcwd(), "cookies.txt")
 VODS_DIR_PATH = "vods"
