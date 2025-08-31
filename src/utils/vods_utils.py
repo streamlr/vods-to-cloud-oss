@@ -22,9 +22,14 @@ def download_vods(VOD_ID: str, ACCESS_TOKEN: str | None) -> bool:
 
     OUTPUT_PATH = path.join(VODS_DIR_PATH, f"{VOD_ID}.mp4")
 
+    flags = [
+        "-q", "source",
+        "-o", OUTPUT_PATH,
+    ]
+
     try:
         subprocess.run([
-            "twitch-dl", "download", VOD_URL, "-q", "source", "-o", OUTPUT_PATH
+            "twitch-dl", "download", VOD_URL, *flags
         ], check=True)
         return True
     except subprocess.CalledProcessError:
