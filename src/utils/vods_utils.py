@@ -1,5 +1,5 @@
 from os import path, makedirs, getcwd
-import yt_dlp
+import subprocess
 
 # This script uses yt-dlp to download Twitch VODs. But it only supports public and not only-subs vods.
 
@@ -22,20 +22,12 @@ def download_vods(VOD_ID: str, ACCESS_TOKEN: str | None) -> bool:
 
     OUTPUT_PATH = path.join(VODS_DIR_PATH, f"{VOD_ID}.mp4")
 
-    ydl_opts = {
-        'cookiefile': COOKIE_PATH,
-        'format': 'best',
-        'outtmpl': OUTPUT_PATH,
-        'http_headers': headers if ACCESS_TOKEN else {},
-        'quiet': True,
-        'no_warnings': True
-    }
-
     try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([VOD_URL])
-            return True
-    except Exception as _:
+        subprocess.run([
+            "twitch-dl", "download", VOD_URL, "-q", "source", "-o", OUTPUT_PATH
+        ], check=True)
+        return True
+    except subprocess.CalledProcessError:
         return False
 
 
