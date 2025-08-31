@@ -13,6 +13,9 @@ __pycache__/
 *.pyo
 *.pyd
 
+# MacOs trash
+.DS_Store
+
 # Twitch OAuth tokens
 src/data/tokens.json
 
