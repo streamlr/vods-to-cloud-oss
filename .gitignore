@@ -1,5 +1,6 @@
-# Python virtual environment
+# Python virtual environments
 .venv/
+venv/
 
 # Environment variables
 .env
@@ -18,6 +19,9 @@ __pycache__/
 
 # Twitch OAuth tokens
 src/data/tokens.json
+
+# YouTube OAuth tokens
+src/data/yt_tokens.json
 
 # Vods dirs & files
 vods/
