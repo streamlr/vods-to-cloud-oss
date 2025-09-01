@@ -3,3 +3,12 @@ requests
 flask
 schedule
 yt-dlp
+
+# Optional: Google YouTube SDK and helpers
+# These are not required by the current implementation (which uses requests),
+# but are useful if you want to switch to the official client libraries.
+google-api-python-client>=2.120.0,<3.0.0
+google-auth>=2.27.0,<3.0.0
+google-auth-oauthlib>=1.2.0,<2.0.0
+google-resumable-media>=2.7.0,<3.0.0
+tqdm>=4.66.0,<5.0.0

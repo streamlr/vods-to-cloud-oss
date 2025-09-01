@@ -51,9 +51,18 @@
             margin-bottom: 0.2rem;
         }
 
-        #close-button {
+        #actions {
             margin-top: 1rem;
-            max-width: 300px;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button {
+            display: inline-block;
+            max-width: 320px;
             padding: 0.3rem 0.5rem;
             background: #0c0c0c;
             border-radius: 0.5rem;
@@ -62,10 +71,10 @@
             color: white;
             font-size: 1rem;
             transition: background 0.3s ease;
+        }
 
-            &:hover {
-                background: #1f1f1f;
-            }
+        .button:hover {
+            background: #1f1f1f;
         }
     </style>
 </head>
@@ -82,7 +91,10 @@
             services. Or <a href="https://github.com/streamlr/vods-to-cloud-oss" target="_blank"
                 rel="noopener noreferrer">contribute on GitHub</a>.
         </p>
-        <a id="close-button" href="https://streamlr.live">Press here to close this tab</a>
+        <div id="actions">
+            <button class="button" onclick="(function(){try{window.close()}catch(e){} setTimeout(function(){ if(!document.hidden){ window.location.href='/' } }, 300)})()">Close this tab</button>
+            <a class="button" href="/">Back to the app</a>
+        </div>
     </section>
 </body>
 

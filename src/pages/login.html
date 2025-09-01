@@ -51,9 +51,39 @@
             margin-bottom: 0.2rem;
         }
 
-        #login-link {
+        #status-yt {
+            margin-top: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            background: #22303a;
+            border-radius: 0.4rem;
+            color: #b7d6ea;
+            display: inline-block;
+        }
+
+        #login-links {
             margin-top: 1rem;
-            max-width: 300px;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-button {
+            display: inline-block;
+            padding: 0.3rem 0.5rem;
+            background: #0c0c0c;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            max-width: 320px;
+
+            &:hover {
+                background: #1f1f1f;
+            }
         }
     </style>
 </head>
@@ -71,7 +101,15 @@
             services. Or <a href="https://github.com/streamlr/vods-to-cloud-oss" target="_blank"
                 rel="noopener noreferrer">contribute on GitHub</a>.
         </p>
-        <a id="login-link" href="{{auth_url}}">Press here to login with Twitch and start using Vods to Cloud</a>
+        <p id="status-yt">{{yt_status}}</p>
+        <div id="login-links">
+            <a class="login-button" href="{{twitch_auth_url}}">Login with Twitch</a>
+            <a class="login-button" href="{{youtube_button_href}}">{{youtube_button_text}}</a>
+        </div>
+        <div id="login-links">
+            <a class="login-button" href="/twitch/logout">Logout Twitch</a>
+            <a class="login-button" href="/yt/logout">Logout YouTube</a>
+        </div>
     </section>
 </body>
 
